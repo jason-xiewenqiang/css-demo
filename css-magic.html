@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Magic</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .border-inside {
+        float: left;
+        margin: 50px;
+        width: 200px;
+        height: 80px;
+        line-height: 80px;
+        background-color: black;
+        border-radius: 8px;
+        text-align: center;
+        outline: 1px darkgrey dashed;
+        outline-offset: -8px;
+        color: #fff;
+      }
+      .border-radius-bor {
+        float: left;
+        margin: 50px;
+        width: 200px;
+        height: 80px;
+        line-height: 80px;
+        background-color: black;
+        border-radius: 8px;
+        text-align: center;
+        color: #fff;
+        box-shadow: 0 0 0 10px darkgrey;
+      }
+      .progress-box {
+        float: left;
+        margin: 50px;
+        width: 200px;
+      }
+      .progress-box > div {
+        width: 180px;
+        height: 26px;
+        margin: 10px auto;
+        border-radius: 16px;
+      }
+      .progress-box .progress-1 {
+        background: linear-gradient(to right, #fb3 50%, #58a 0);
+        background-size: 40px 100%;
+        box-shadow: inset 0 0 3px #555;
+      }
+      .progress-box .progress-2 {
+        background: linear-gradient(
+          45deg,
+          #fb3 25%,
+          #58a 0,
+          #58a 50%,
+          #fb3 0,
+          #fb3 75%,
+          #58a 0
+        );
+        background-size: 40px 40px;
+      }
+      .progress-box .progress-3 {
+        background: repeating-linear-gradient(
+          60deg,
+          #fb3,
+          #fb3 15px,
+          #58a 0,
+          #58a 30px
+        );
+      }
+      .fold {
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+        width: 200px;
+        height: 80px;
+        color: #fff;
+        line-height: 80px;
+        text-align: center;
+        background: linear-gradient(
+              to left bottom,
+              transparent 50%,
+              rgba(0, 0, 0, 0.5) 0
+            )
+            no-repeat 100% 0 / 2em 2em,
+          linear-gradient(-135deg, transparent 1.4em, #06c 0);
+      }
+      .linear {
+        background: linear-gradient(
+              to left bottom,
+              transparent 50%,
+              rgba(0, 0, 0, 0.5)
+            )
+            no-repeat 100% 0 / 2em 2em,
+          linear-gradient(-135deg, transparent 1.4em, #06c);
+      }
+
+      .fold-1 {
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+        position: relative;
+        width: 200px;
+        height: 80px;
+        border-radius: 0.5em;
+        color: #fff;
+        line-height: 80px;
+        text-align: center;
+        background: linear-gradient(-150deg, transparent 1.5em, #58a 0);
+      }
+      .fold-1::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: linear-gradient(
+            to left bottom,
+            transparent 50%,
+            rgba(0, 0, 0, 0.2) 0,
+            rgba(0, 0, 0, 0.4)
+          )
+          100% 0 no-repeat;
+        width: 1.73em;
+        height: 3em;
+        transform: translateY(-1.3em) rotate(-30deg);
+        transform-origin: bottom right;
+        border-bottom-left-radius: inherit;
+        box-shadow: -0.2em 0.2em 0.3em -0.1em rgba(0, 0, 0, 0.15);
+      }
+
+      .stripe-bg {
+        padding: 0.5em;
+        color: black;
+        line-height: 1.5em;
+        background: beige;
+        background-size: auto 3em;
+        background-origin: content-box;
+        background-image: linear-gradient(
+          rgba(0, 0, 0, 0.2) 50%,
+          transparent 0
+        );
+      }
+      .stripe-bg > p {
+        margin: 0;
+      }
+
+      .my-line {
+        line-height: 1.4em;
+        background: linear-gradient(gray, gray) no-repeat;
+        background-size: 100% 1px;
+        background-position: 0 1.15em;
+        text-shadow: 0.05em 0 #fff, -0.05em 0 #fff;
+      }
+
+      .bg-line-rand {
+        margin-top: 20px;
+        width: 480px;
+        height: 60px;
+        background-color: #eee;
+        background-image: linear-gradient(90deg, #fb3 11px, transparent 0),
+          linear-gradient(90deg, #ab4 23px, transparent 0),
+          linear-gradient(90deg, #655 41px, transparent 0);
+        background-size: 41px 100%, 61px 100%, 83px 100%;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+      }
+      .bg-dot-rand {
+        margin-top: 20px;
+        width: 200px;
+        height: 200px;
+        background-color: #eee;
+        background-image: radial-gradient(circle, #fb3 5px, transparent 0),
+          radial-gradient(circle, #ab4 13px, transparent 0),
+          radial-gradient(circle, #655 31px, transparent 0);
+        background-repeat: no-repeat;
+        background-size: 101px 203px, 147px 60px, 373px 201px;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+      }
+      .animate1 {
+        animation: move 4s linear infinite;
+      }
+      .animate2 {
+        animation: move2 4s linear infinite;
+      }
+      @keyframes move {
+        0% {
+          background-position: 0 0, 0 0, 0 0;
+        }
+        50% {
+          background-position: -10px 0, 20px 0, 30px 0;
+        }
+        100% {
+          background-position: 0 0, 30px 0, 10px 0;
+        }
+      }
+      @keyframes move2 {
+        0% {
+          background-position: 0 0, 0 0, 0 0;
+        }
+        50% {
+          background-position: -10px 30px, 20px 0, -40px 80px;
+        }
+        100% {
+          background-position: 0 20px, 60px -20px, 10px 30px;
+        }
+      }
+
+      .bg-qi {
+        margin-top: 20px;
+        width: 200px;
+        height: 200px;
+        background-color: #eee;
+        background-image: linear-gradient(
+            45deg,
+            rgba(0, 0, 0, 0.25) 25%,
+            transparent 0,
+            transparent 75%,
+            rgba(0, 0, 0, 0.25) 0
+          ),
+          linear-gradient(
+            45deg,
+            rgba(0, 0, 0, 0.25) 25%,
+            transparent 0,
+            transparent 75%,
+            rgba(0, 0, 0, 0.25) 0
+          );
+        background-position: 0 0, 20px 20px;
+        background-size: 40px 40px;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="border-inside">内部虚线圆角边框</div>
+    <div class="border-radius-bor">外边框圆角边框</div>
+    <div class="progress-box">
+      <div class="progress-1"></div>
+      <div class="progress-2"></div>
+      <div class="progress-3"></div>
+    </div>
+    <div class="fold">折角效果哦</div>
+    <div class="fold linear">折角效果哦</div>
+    <div class="fold-1">折角效果哦</div>
+    <div class="stripe-bg">
+      <p>hello you</p>
+      <p>hello you</p>
+      <p>hello you</p>
+      <p>hello you</p>
+      <p>hello you</p>
+    </div>
+    <div class="">
+      <span class="my-line"
+        >i have your big apple.you have a too? hi hi hi. big apple.you have
+      </span>
+    </div>
+
+    <div class="bg-line-rand black-theme"></div>
+    <div class="bg-line-rand black-theme animate1"></div>
+    <div class="bg-dot-rand black-theme animate2"></div>
+
+    <div class="bg-qi black-theme"></div>
+  </body>
+</html>
